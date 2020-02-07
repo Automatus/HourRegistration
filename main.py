@@ -3,32 +3,46 @@ import re
 
 # Program for registering hours worked on certain project
 
-
 # Showing available projects
-# print("Available projects:")
-# print("0. New project \n")
+print("Choose your project:")
+file = open("Projects", "r")
+projects = file.readlines()
+projectslist = []
+x = 1
+print("0. New File")
+for line in projects:
+    projectslist.append(line.strip())
+    print(str(x) + ". " + line.strip())
+    x += 1
 
-# choosing project
-# ProjectChoice = input("Choose a number\n")
+choice = int(input())-1
+if choice == -1:
+    ProjectChoice = input("Name of new project:\n")
+    file = open("Projects", "a")
+    file.write(ProjectChoice + "\n")
+else:
+    ProjectChoice = projectslist[choice]
 
 # registering starttime
 starttime = time.time()
-print("\nChecked in for " + "project x" + " on " + time.asctime(time.localtime()))
-file = open("Registration.txt", "a")
-file.write("Checked in  for " + "project x" + " on " + time.asctime(time.localtime()) + "\n")
+print("\nChecked in on " + time.asctime(time.localtime()))
+file = open(ProjectChoice, "a")
+file.write("Checked in  on " + time.asctime(time.localtime()) + "\n")
 file.close
 
 # registering endtime and adding to total
-print("0. check out")
-input("Choose a number\n")
+input("Type 0 and ENTER to check out\n")
 endtime = time.time()
 minutesworked = int((endtime - starttime)/60)
-file = open("Registration.txt", "r")
-oldtotal = re.sub("\D", "", file.readlines()[-2])
-file.close()
+if choice == -1:
+    oldtotal = 0
+else:
+    file = open(ProjectChoice, "r")
+    oldtotal = re.sub("\D", "", file.readlines()[-2])
+    file.close()
 newtotal = int(oldtotal) + minutesworked
-print("\nChecked out for " + "project x" + " on " + time.asctime(time.localtime()))
+print("\nChecked out on " + time.asctime(time.localtime()))
 print("Minutes worked: " + str(minutesworked) + "\n" + "New total minutes worked: " + str(newtotal) + "\n")
-file = open("Registration.txt", "a")
-file.write("Checked out for " + "project x" + " on " + time.asctime(time.localtime()) + "\n" + "Minutes worked: " + str(minutesworked) + "\n"+ "New total minutes worked: " + str(newtotal) + "\n")
+file = open(ProjectChoice, "a")
+file.write("Checked out on " + time.asctime(time.localtime()) + "\n" + "Minutes worked: " + str(minutesworked) + "\n"+ "New total minutes worked: " + str(newtotal) + "\n")
 file.close
