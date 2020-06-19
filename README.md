@@ -16,3 +16,4 @@ automatically registers worked hours
 * SQL now also added
 
   also thanks to: https://www.tutorialspoint.com/index.htm
+  and: https://docs.python.org/2/library/sqlite3.html
