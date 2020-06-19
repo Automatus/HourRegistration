@@ -23,8 +23,13 @@ info will also be stored in a SQL table
 import time
 import re
 import sqlite3
+import os
 
 # Program for registering hours worked on certain project
+
+if not os.path.isfile(os.path.join(os.getcwd(), "Projects")):
+    file = open("Projects", "w")
+    file.close()
 
 while True:
     # Showing available projects
@@ -79,12 +84,14 @@ while True:
     file.close
 
     conn = sqlite3.connect('urenregistratie.db')
-    conn.execute('''CREATE TABLE IF NOT EXISTS''' + ProjectChoice + '''
+    conn.execute('''CREATE TABLE IF NOT EXISTS ''' + ProjectChoice + '''
                  (StartTime TINYTEXT,
                   EndTime TINYTEXT,
                   MinutesWorked TINYTEXT,
                   NewTotalMinutesWorked TINYTEXT);''')
-    conn.execute("INSERT INTO COMPANY VALUES (" + sqlstarttime + "," +
-                 sqlendtime + "," + minutesworked + "," + newtotal + ");")
+    conn.execute("INSERT INTO " + ProjectChoice + " VALUES ('"
+                 + str(sqlstarttime) + "','" +
+                 str(sqlendtime) + "','" + str(minutesworked) + "','" +
+                 str(newtotal) + "');")
     conn.commit()
     conn.close()
