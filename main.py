@@ -89,9 +89,10 @@ while True:
                   EndTime TINYTEXT,
                   MinutesWorked TINYTEXT,
                   NewTotalMinutesWorked TINYTEXT);''')
-    conn.execute("INSERT INTO " + ProjectChoice + " VALUES ('"
-                 + str(sqlstarttime) + "','" +
-                 str(sqlendtime) + "','" + str(minutesworked) + "','" +
+    conn.execute("INSERT INTO " + ProjectChoice + " VALUES ('" +
+                 str(sqlstarttime) + "','" +
+                 str(sqlendtime) + "','" +
+                 str(minutesworked) + "','" +
                  str(newtotal) + "');")
     conn.commit()
     conn.close()
