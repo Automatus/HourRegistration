@@ -88,5 +88,7 @@ while True:
     values = [sqlstarttime, sqlendtime, minutesworked, newtotal]
     conn.execute("INSERT INTO " +
                  ProjectChoice + " VALUES (?, ?, ?, ?)", values)
+    # would be better to not use string operations in sql code, so be carefull with naming projects for now :)
+    # https://xkcd.com/327/
     conn.commit()
     conn.close()
