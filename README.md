@@ -1,9 +1,6 @@
 # HourRegistration
 automatically registers worked hours
 
-make a file in the same folder called Projects 
-
-this program is terminal based (at least so far)
 
 an example of how things will appear in a file:
 
@@ -15,4 +12,7 @@ Minutes worked: 1
 
 New total minutes worked: 9
 
+
 SQL now also added
+
+also thanks to: https://www.tutorialspoint.com/index.htm
