@@ -7,4 +7,15 @@ Created on Fri Jun 19 11:46:22 2020
 
 Shows saved data from SQL Table
 """
+import sqlite3
 
+db = input("Database name?")
+table = input("Table name?")
+
+conn = sqlite3.connect(db)
+cursor = conn.cursor()
+cursor.execute("SELECT * from " + table)
+result = cursor.fetchall()
+print(result)
+conn.commit()
+conn.close()
