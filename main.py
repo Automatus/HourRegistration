@@ -14,11 +14,15 @@ this program is terminal based (at least so far)
 an example of how things will appear in a file:
     Checked in for project x on Fri Feb 7 15:08:54 2020
     Checked out for project x on Fri Feb 7 15:10:02 2020
-    Minutes worked: 1 New total minutes worked: 9
+    Minutes worked: 1
+    New total minutes worked: 9
+
+info will also be stored in a SQL table
 """
 
 import time
 import re
+import sqlite3
 
 # Program for registering hours worked on certain project
 
@@ -46,6 +50,7 @@ while True:
 
     # registering starttime
     starttime = time.time()
+    sqlstarttime = time.asctime(time.localtime())
     print("\nChecked in on " + time.asctime(time.localtime()))
     file = open(ProjectChoice, "a")
     file.write("Checked in  on " + time.asctime(time.localtime()) + "\n")
@@ -54,6 +59,7 @@ while True:
     # registering endtime and adding to total
     input("Type 0 and ENTER to check out\n")
     endtime = time.time()
+    sqlendtime = time.asctime(time.localtime())
     minutesworked = int((endtime - starttime)/60)
     if choice == -1:
         oldtotal = 0
@@ -71,3 +77,14 @@ while True:
                "Minutes worked: " + str(minutesworked) + "\n" +
                "New total minutes worked: " + str(newtotal) + "\n")
     file.close
+
+    conn = sqlite3.connect('urenregistratie.db')
+    conn.execute('''CREATE TABLE IF NOT EXISTS''' + ProjectChoice + '''
+                 (StartTime TINYTEXT,
+                  EndTime TINYTEXT,
+                  MinutesWorked TINYTEXT,
+                  NewTotalMinutesWorked TINYTEXT);''')
+    conn.execute("INSERT INTO COMPANY VALUES (" + sqlstarttime + "," +
+                 sqlendtime + "," + minutesworked + "," + newtotal + ");")
+    conn.commit()
+    conn.close()
