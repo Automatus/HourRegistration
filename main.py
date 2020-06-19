@@ -7,10 +7,6 @@ Urenregistratie
 
 automatically registers worked hours
 
-make a file in the same folder called Projects
-
-this program is terminal based (at least so far)
-
 an example of how things will appear in a file:
     Checked in for project x on Fri Feb 7 15:08:54 2020
     Checked out for project x on Fri Feb 7 15:10:02 2020
@@ -89,10 +85,8 @@ while True:
                   EndTime TINYTEXT,
                   MinutesWorked TINYTEXT,
                   NewTotalMinutesWorked TINYTEXT);''')
-    conn.execute("INSERT INTO " + ProjectChoice + " VALUES ('" +
-                 str(sqlstarttime) + "','" +
-                 str(sqlendtime) + "','" +
-                 str(minutesworked) + "','" +
-                 str(newtotal) + "');")
+    values = [sqlstarttime, sqlendtime, minutesworked, newtotal]
+    conn.execute("INSERT INTO " +
+                 ProjectChoice + " VALUES (?, ?, ?, ?)", values)
     conn.commit()
     conn.close()
