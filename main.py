@@ -58,7 +58,7 @@ while True:
     file.close
 
     # registering endtime and adding to total
-    input("Type 0 and ENTER to check out\n")
+    input("Press ENTER to check out\n")
     endtime = time.time()
     sqlendtime = time.asctime(time.localtime())
     minutesworked = int((endtime - starttime)/60)
@@ -88,7 +88,8 @@ while True:
     values = [sqlstarttime, sqlendtime, minutesworked, newtotal]
     conn.execute("INSERT INTO " +
                  ProjectChoice + " VALUES (?, ?, ?, ?)", values)
-    # would be better to not use string operations in sql code, so be carefull with naming projects for now :)
+    # would be better to not use string operations in sql code, so be
+    # carefull with naming projects for now :)
     # https://xkcd.com/327/
     conn.commit()
     conn.close()
