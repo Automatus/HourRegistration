@@ -1,3 +1,22 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Urenregistratie
+
+@author: Automatus
+
+automatically registers worked hours
+
+make a file in the same folder called Projects
+
+this program is terminal based (at least so far)
+
+an example of how things will appear in a file:
+    Checked in for project x on Fri Feb 7 15:08:54 2020
+    Checked out for project x on Fri Feb 7 15:10:02 2020
+    Minutes worked: 1 New total minutes worked: 9
+"""
+
 import time
 import re
 
@@ -44,7 +63,10 @@ while True:
         file.close()
     newtotal = int(oldtotal) + minutesworked
     print("\nChecked out on " + time.asctime(time.localtime()))
-    print("Minutes worked: " + str(minutesworked) + "\n" + "New total minutes worked: " + str(newtotal) + "\n")
+    print("Minutes worked: " + str(minutesworked) + "\n" +
+          "New total minutes worked: " + str(newtotal) + "\n")
     file = open(ProjectChoice, "a")
-    file.write("Checked out on " + time.asctime(time.localtime()) + "\n" + "Minutes worked: " + str(minutesworked) + "\n"+ "New total minutes worked: " + str(newtotal) + "\n")
+    file.write("Checked out on " + time.asctime(time.localtime()) + "\n" +
+               "Minutes worked: " + str(minutesworked) + "\n" +
+               "New total minutes worked: " + str(newtotal) + "\n")
     file.close
