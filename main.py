@@ -59,7 +59,8 @@ while True:
         oldtotal = 0
     else:
         file = open(ProjectChoice, "r")
-        oldtotal = re.sub("\D", "", file.readlines()[-2])
+        oldtotal = re.sub("[^0-9]", "", file.readlines()[-2])
+        # new: [^0-9]    old: \D
         file.close()
     newtotal = int(oldtotal) + minutesworked
     print("\nChecked out on " + time.asctime(time.localtime()))
